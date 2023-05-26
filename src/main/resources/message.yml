@@ -1,0 +1,66 @@
+# +──────────────────────────────────+ #
+# │         MESSAGE SETTINGS         │ #
+# +──────────────────────────────────+ #
+messages:
+
+  # 접두사
+  prefix: "&fYD-&eDailyQuest &6|&r"
+
+  # 퀘스트 클리어 여부를 초기화 한 경우
+  resetFinish: "&a퀘스트 클리어 여부를 전부 초기화 했습니다."
+
+  # 위치 정보를 입력하려는 경우
+  enterApproximateLocation: "&a위치 정보를 입력해주세요:"
+
+  # 위치 정보를 설정한 경우
+  approximateLocationSet: "&a위치 정보를 설정했습니다."
+
+
+
+# +──────────────────────────────────+ #
+# │      ERROR MESSAGE SETTINGS      │ #
+# +──────────────────────────────────+ #
+errorMessages:
+
+  # 플랫폼이 잘못된 경우
+  wrongPlatform: "&c콘솔에서는 해당 명령어를 사용할 수 없습니다."
+
+  # 권한이 없는 경우
+  noPermission: "&c해당 명령어를 실행할 권한이 없습니다."
+
+  # 명령어가 잘못된 경우
+  wrongCommand: "&c잘못된 명령어입니다."
+
+  # 플레이어를 찾을 수 없는 경우
+  playerNotFound: "&c해당 플레이어를 찾을 수 없습니다."
+
+  # 배달지 이름을 입력하지 않은 경우
+  noDestinationName: "&c배달지의 이름을 입력해주세요."
+
+  # 선택된 Citizens NPC가 없는 경우
+  noSelectedNPC: "&c선택된 NPC가 없습니다. &7[/npc sel]"
+
+  # 해당 이름의 배달지가 이미 있는 경우
+  nameAlreadyTaken: "&c해당 이름의 배달지는 이미 존재합니다."
+
+  # 배달지를 생성한 경우
+  destinationCreated: "&c배달지를 생성하였습니다."
+
+  # 배달지가 존재하지 않는 경우
+  destinationNotExists: "&c해당 이름의 배달지는 존재하지 않습니다."
+
+  # 타켓을 입력하지 않은 경우
+  noTarget: "&c대상 플레이어를 입력해주세요."
+
+
+  # 해당 퀘스트에 배정되지 않아 해당 NPC와 거래를 할 수 없는 경우
+  cannotTradeThisNPC: "&c당신은 해당 NPC와 거래할 수 없습니다."
+
+  # 이미 해당 퀘스트의 보상을 받은 경우
+  alreadyClaimedReward: "&c이미 보상을 받았습니다."
+
+  # 거래에 성공한 경우
+  tradeSuccess: "&c성공적으로 거래를 완료했습니다."
+
+  # 배달 물품이 올바르지 않은 경우
+  noRequireItems: "&c배달 물품이 올바르지 않습니다. 다시 한 번 확인해주세요!"

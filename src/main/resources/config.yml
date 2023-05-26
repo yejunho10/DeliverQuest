@@ -1,0 +1,143 @@
+# 인벤토리 설정
+gui:
+
+  # 배달 퀘스트 할당 현황 확인
+  status:
+
+    # 슬롯 설정
+    slots:
+
+      # 1번 배달 퀘스트
+      first: 11
+
+      # 2번 배달 퀘스트
+      second: 13
+
+      # 3번 배달 퀘스트
+      third: 15
+
+    # 인벤토리 설정
+    inventory:
+      title: "배달 현황"
+      size: 27
+      items:
+        '0':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '1':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '2':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '3':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '4':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '5':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '6':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '7':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '8':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '9':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '17':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '18':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '19':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '20':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '21':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '22':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '23':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '24':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '25':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'
+        '26':
+          material: GRAY_STAINED_GLASS_PANE
+          amount: 1
+          durability: 0
+          meta:
+            displayName: '§r'

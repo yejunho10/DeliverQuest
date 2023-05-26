@@ -1,14 +1,18 @@
-name: ST-BoilerPlate # TODO: 수정
-main: net.starly.boilerplate.BoilerPlateMain # TODO: 수정
+name: YD-DailyQuest
+main: net.starly.quest.YDDailyQuestMain
 author: Starly Team
 website: http://starly.kr/
 
-description: BoilerPlate Plugin. # TODO: 수정
+description: DailyQuest Plugin.
 
 softdepend:
   - ST-Core
+  - Citizens
 
 version: 1.0
-api-version: 1.13
+api-version: 1.19
 
 commands:
+
+  배달:
+    description: 배달 명령어
