@@ -38,8 +38,6 @@ public class SimpleTradeService implements TradeServiceBase {
         for (ItemStack requireItem : trader.getRequirements()) {
             if (!hasRequirements) continue;
 
-            requireItem = requireItem.clone();
-            requireItem.setAmount(1);
             if (!inventory.containsAtLeast(requireItem, requireItem.getAmount())) {
                 hasRequirements = false;
             }
@@ -48,11 +46,9 @@ public class SimpleTradeService implements TradeServiceBase {
         if (hasRequirements) {
             trader.getRequirements().forEach(requireItem -> InventoryUtil.removeItem(player, requireItem, requireItem.getAmount()));
             trader.getRewards().forEach(rewardItem -> {
-                ItemStack[] beforeContents = Arrays.copyOf(inventory.getContents(), inventory.getSize());
-                inventory.addItem(rewardItem);
-                if (Arrays.equals(beforeContents, inventory.getContents())) {
+                if (InventoryUtil.getSpace(inventory) - 5 < 1) {
                     player.getWorld().dropItem(player.getLocation(), rewardItem);
-                }
+                } else inventory.addItem(rewardItem);
             });
 
             messageContext.get(MessageType.NORMAL, "tradeSuccess").send(player);

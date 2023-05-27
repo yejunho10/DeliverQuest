@@ -14,7 +14,7 @@ public class MessageLoader {
 
     public static void load(FileConfiguration config) {
         if (loaded) {
-            MessageContext.getInstance().reset();
+            MessageContext.getInstance().clear();
             loaded = false;
         }
 

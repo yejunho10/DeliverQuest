@@ -11,16 +11,14 @@ import java.util.function.Function;
 public class MessageContext {
 
     private static MessageContext instance;
-
     public static MessageContext getInstance() {
         if (instance == null) instance = new MessageContext();
         return instance;
     }
+    private MessageContext() {}
+
 
     private final Map<MessageType, Map<String, String>> map = new HashMap<>();
-
-    private MessageContext() {
-    }
 
     public STMessage get(MessageType type, String key, String def) {
         return new STMessage(getPrefix(), map.getOrDefault(type, Collections.emptyMap()).getOrDefault(key, def).replace("{prefix}", getPrefix()));
@@ -43,12 +41,12 @@ public class MessageContext {
     }
 
     public void set(MessageType type, String key, String value) {
-        Map<String, String> typeMap = map.getOrDefault(type, Collections.emptyMap());
+        Map<String, String> typeMap = map.getOrDefault(type, new HashMap<>());
         typeMap.put(key, ChatColor.translateAlternateColorCodes('&', value));
         map.put(type, typeMap);
     }
 
-    public void reset() {
+    public void clear() {
         map.clear();
     }
 
