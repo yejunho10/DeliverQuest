@@ -1,6 +1,6 @@
 package net.starly.quest;
 
-import net.starly.quest.command.DeliverCmd;
+import net.starly.quest.command.DeliverExecutor;
 import net.starly.quest.destination.repo.DestinationRepository;
 import net.starly.quest.dispatcher.ChatInputDispatcher;
 import net.starly.quest.message.MessageLoader;
@@ -62,8 +62,8 @@ public class YDDailyQuestMain extends JavaPlugin {
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         PluginCommand deliverCmd = getServer().getPluginCommand("배달");
         if (deliverCmd != null) {
-            deliverCmd.setExecutor(new DeliverCmd());
-            deliverCmd.setTabCompleter(new DeliverCmd());
+            deliverCmd.setExecutor(new DeliverExecutor());
+            deliverCmd.setTabCompleter(new DeliverExecutor());
         }
 
         /* LISTENER
