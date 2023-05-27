@@ -59,10 +59,11 @@ public class YDDailyQuestMain extends JavaPlugin {
 
         /* COMMAND
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+        DeliverExecutor deliverExecutor = new DeliverExecutor();
         PluginCommand deliverCmd = getServer().getPluginCommand("배달");
         if (deliverCmd != null) {
-            deliverCmd.setExecutor(new DeliverExecutor());
-            deliverCmd.setTabCompleter(new DeliverExecutor());
+            deliverCmd.setExecutor(deliverExecutor);
+            deliverCmd.setTabCompleter(deliverExecutor);
         }
 
         /* LISTENER
