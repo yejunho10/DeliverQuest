@@ -1,14 +1,13 @@
 package net.starly.quest.trade.strategy.service;
 
 import net.citizensnpcs.api.npc.NPC;
-import net.starly.core.builder.ItemBuilder;
 import net.starly.core.util.InventoryUtil;
 import net.starly.quest.deliver.manager.DeliverAssignManager;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.message.MessageContext;
 import net.starly.quest.message.enums.MessageType;
 import net.starly.quest.trade.Trader;
-import net.starly.quest.trade.strategy.TradeStrategyBase;
+import net.starly.quest.trade.strategy.TradeServiceBase;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -17,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public class SimpleTradeService implements TradeStrategyBase {
+public class SimpleTradeService implements TradeServiceBase {
 
     @Override
     public void execute(Player player, NPC npc, Destination destination) {
@@ -34,19 +33,19 @@ public class SimpleTradeService implements TradeStrategyBase {
 
         Trader trader = destination.getTrader();
 
-        final boolean[] hasRequirements = {true};
+        boolean hasRequirements = true;
         Inventory inventory = player.getInventory();
-        trader.getRequirements().forEach(requireItem -> {
-            if (!hasRequirements[0]) return;
+        for (ItemStack requireItem : trader.getRequirements()) {
+            if (!hasRequirements) continue;
 
             requireItem = requireItem.clone();
             requireItem.setAmount(1);
             if (!inventory.containsAtLeast(requireItem, requireItem.getAmount())) {
-                hasRequirements[0] = false;
+                hasRequirements = false;
             }
-        });
+        }
 
-        if (hasRequirements[0]) {
+        if (hasRequirements) {
             trader.getRequirements().forEach(requireItem -> InventoryUtil.removeItem(player, requireItem, requireItem.getAmount()));
             trader.getRewards().forEach(rewardItem -> {
                 ItemStack[] beforeContents = Arrays.copyOf(inventory.getContents(), inventory.getSize());

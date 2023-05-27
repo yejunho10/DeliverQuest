@@ -47,7 +47,6 @@ public class YDDailyQuestMain extends JavaPlugin {
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         saveDefaultConfig();
-        reloadConfig();
 
         File messageFile = new File(getDataFolder(), "message.yml");
         if (!messageFile.exists()) saveResource("message.yml", false);

@@ -4,7 +4,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.starly.quest.destination.Destination;
 import org.bukkit.entity.Player;
 
-public interface TradeStrategyBase {
+public interface TradeServiceBase {
 
     void execute(Player player, NPC npc, Destination destination);
 }

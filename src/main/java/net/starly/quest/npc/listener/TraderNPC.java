@@ -7,7 +7,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.starly.quest.trade.TraderMap;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.npc.listener.base.NPCListenerBase;
-import net.starly.quest.trade.strategy.TradeStrategyBase;
+import net.starly.quest.trade.strategy.TradeServiceBase;
 import org.bukkit.entity.Player;
 
 public class TraderNPC extends NPCListenerBase {
@@ -20,7 +20,7 @@ public class TraderNPC extends NPCListenerBase {
     private TraderNPC() {}
 
 
-    @Getter @Setter private TradeStrategyBase tradeServiceProvider;
+    @Getter @Setter private TradeServiceBase tradeServiceProvider;
 
     @Override
     public void onRightClick(NPCRightClickEvent event) {
