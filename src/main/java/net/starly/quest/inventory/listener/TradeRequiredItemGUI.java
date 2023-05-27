@@ -36,19 +36,21 @@ public class TradeRequiredItemGUI extends InventoryListenerBase {
 
     @Override
     protected void onClose(InventoryCloseEvent event) {
-        if (!event.getPlayer().isOp()) return;
+        if (event.getPlayer().isOp()) {
+            Destination destination = ((DeliverySettingsGUI) event.getInventory().getHolder()).destination();
+            List<ItemStack> requiredItems = Arrays.stream(event.getInventory().getContents()).filter(Objects::nonNull).toList();
+            destination.getTrader().setRequirements(requiredItems);
 
-        Destination destination = ((DeliverySettingsGUI) event.getInventory().getHolder()).destination();
-        List<ItemStack> requiredItems = Arrays.stream(event.getInventory().getContents()).filter(Objects::nonNull).toList();
-        destination.getTrader().setRequirements(requiredItems);
+            new BukkitRunnable() {
 
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                DestinationSettingsGUI.getInstance().openInventory((Player) event.getPlayer(), destination);
-            }
-        }.runTaskLater(YDDailyQuestMain.getInstance(), 1L);
+                @Override
+                public void run() {
+                    DestinationSettingsGUI.getInstance().openInventory((Player) event.getPlayer(), destination);
+                }
+            }.runTaskLater(YDDailyQuestMain.getInstance(), 1L);
+        } else {
+            DeliverStatusGUI.getInstance().openInventory((Player) event.getPlayer(), null);
+        }
     }
 
     @Override
