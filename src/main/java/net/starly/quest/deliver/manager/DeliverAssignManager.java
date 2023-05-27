@@ -47,7 +47,7 @@ public class DeliverAssignManager {
     }
 
     public void setFinished(UUID uniqueId, Destination destination, boolean finished) {
-        Map<Destination, Boolean> data = this.data.getOrDefault(uniqueId, new HashMap<>());
+        Map<Destination, Boolean> data = this.data.getOrDefault(uniqueId, Collections.emptyMap());
         data.put(destination, finished);
         this.data.put(uniqueId, data);
     }

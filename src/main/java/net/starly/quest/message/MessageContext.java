@@ -3,6 +3,7 @@ package net.starly.quest.message;
 import net.starly.quest.message.enums.MessageType;
 import org.bukkit.ChatColor;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -22,7 +23,7 @@ public class MessageContext {
     }
 
     public STMessage get(MessageType type, String key, String def) {
-        return new STMessage(getPrefix(), map.getOrDefault(type, new HashMap<>()).getOrDefault(key, def).replace("{prefix}", getPrefix()));
+        return new STMessage(getPrefix(), map.getOrDefault(type, Collections.emptyMap()).getOrDefault(key, def).replace("{prefix}", getPrefix()));
     }
 
     public STMessage get(MessageType type, String key) {
@@ -30,7 +31,7 @@ public class MessageContext {
     }
 
     public String getOnlyString(MessageType type, String key) {
-        return map.getOrDefault(type, new HashMap<>()).getOrDefault(key, "");
+        return map.getOrDefault(type, Collections.emptyMap()).getOrDefault(key, "");
     }
 
     public STMessage get(MessageType type, String key, String def, Function<String, String> replacer) {
@@ -42,7 +43,7 @@ public class MessageContext {
     }
 
     public void set(MessageType type, String key, String value) {
-        Map<String, String> typeMap = map.getOrDefault(type, new HashMap<>());
+        Map<String, String> typeMap = map.getOrDefault(type, Collections.emptyMap());
         typeMap.put(key, ChatColor.translateAlternateColorCodes('&', value));
         map.put(type, typeMap);
     }
@@ -53,6 +54,6 @@ public class MessageContext {
 
 
     private String getPrefix() {
-        return map.getOrDefault(MessageType.NORMAL, new HashMap<>()).getOrDefault("prefix", "");
+        return map.getOrDefault(MessageType.NORMAL, Collections.emptyMap()).getOrDefault("prefix", "");
     }
 }
