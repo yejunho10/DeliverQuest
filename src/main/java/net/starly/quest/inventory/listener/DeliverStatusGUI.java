@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -68,21 +67,21 @@ public class DeliverStatusGUI extends InventoryListenerBase {
                 config.getInt("gui.status.slots.first"),
                 new ItemBuilder(Material.END_CRYSTAL)
                         .setDisplayName("&r" + deliverQuests.get(0).getName())
-                        .setLore("§e› §7좌클릭으로 배달 물품을 확인하실 수 있습니다.", "§e› §7우클릭으로 보상을 확인하실 수 있습니다.", "§e› §f위치 : " + destination.getApproximateLocation(), "§e› §f클리어 여부 : " + (assignManager.isFinished(player.getUniqueId(), deliverQuests.get(0)) ? "§aO" : "§cX"))
+                        .setLore("§e› §7좌클릭으로 배달 물품을 확인하실 수 있습니다.", "§e› §7우클릭으로 보상을 확인하실 수 있습니다.", "§e› §f위치 : " + deliverQuests.get(0).getApproximateLocation(), "§e› §f클리어 여부 : " + (assignManager.isFinished(player.getUniqueId(), deliverQuests.get(0)) ? "§aO" : "§cX"))
                         .build()
         );
         inventory.setItem(
                 config.getInt("gui.status.slots.second"),
                 new ItemBuilder(Material.END_CRYSTAL)
                         .setDisplayName("&r" + deliverQuests.get(1).getName())
-                        .setLore("§e› §7좌클릭으로 배달 물품을 확인하실 수 있습니다.", "§e› §7우클릭으로 보상을 확인하실 수 있습니다.", "§e› §f위치 : " + destination.getApproximateLocation(), "§e› §f클리어 여부 : " + (assignManager.isFinished(player.getUniqueId(), deliverQuests.get(1)) ? "§aO" : "§cX"))
+                        .setLore("§e› §7좌클릭으로 배달 물품을 확인하실 수 있습니다.", "§e› §7우클릭으로 보상을 확인하실 수 있습니다.", "§e› §f위치 : " + deliverQuests.get(1).getApproximateLocation(), "§e› §f클리어 여부 : " + (assignManager.isFinished(player.getUniqueId(), deliverQuests.get(1)) ? "§aO" : "§cX"))
                         .build()
         );
         inventory.setItem(
                 config.getInt("gui.status.slots.third"),
                 new ItemBuilder(Material.END_CRYSTAL)
                         .setDisplayName("&r" + deliverQuests.get(2).getName())
-                        .setLore("§e› §7좌클릭으로 배달 물품을 확인하실 수 있습니다.", "§e› §7우클릭으로 보상을 확인하실 수 있습니다.", "§e› §f위치 : " + destination.getApproximateLocation(), "§e› §f클리어 여부 : " + (assignManager.isFinished(player.getUniqueId(), deliverQuests.get(2)) ? "§aO" : "§cX"))
+                        .setLore("§e› §7좌클릭으로 배달 물품을 확인하실 수 있습니다.", "§e› §7우클릭으로 보상을 확인하실 수 있습니다.", "§e› §f위치 : " + deliverQuests.get(2).getApproximateLocation(), "§e› §f클리어 여부 : " + (assignManager.isFinished(player.getUniqueId(), deliverQuests.get(2)) ? "§aO" : "§cX"))
                         .build()
         );
 

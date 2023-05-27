@@ -12,17 +12,19 @@ import net.starly.quest.message.MessageContext;
 import net.starly.quest.message.enums.MessageType;
 import net.starly.quest.trade.Trader;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DeliverCmd implements CommandExecutor {
+public class DeliverCmd implements CommandExecutor, TabCompleter {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         MessageContext messageContext = MessageContext.getInstance();
         if (!(sender instanceof Player player)) {
             messageContext.get(MessageType.ERROR, "wrongPlatform").send(sender);
@@ -39,28 +41,37 @@ public class DeliverCmd implements CommandExecutor {
 
         switch (args[0]) {
             case "초기화" -> {
+                // argument pre-check
                 if (args.length == 1) {
                     messageContext.get(MessageType.ERROR, "noTarget").send(player);
                     return false;
                 } else if (args.length > 2) {
                     messageContext.get(MessageType.ERROR, "wrongCommand").send(player);
-                    
+
                     return false;
                 }
 
-                OfflinePlayer target = YDDailyQuestMain.getInstance().getServer().getOfflinePlayer(args[1]);
-                if (!(target.hasPlayedBefore() || target.isOnline())) {
-                    messageContext.get(MessageType.ERROR, "playerNotFound").send(player);
-                    return false;
-                }
+                // `getOfflinePlayer`로 발생하는 랙을 줄이기 위해 비동기로 실행
+                new BukkitRunnable() {
 
-                DeliverAssignManager assignManager = DeliverAssignManager.getInstance();
-                assignManager.getData(target.getUniqueId()).keySet().forEach(destination -> assignManager.setFinished(player.getUniqueId(), destination, false));
-                messageContext.get(MessageType.NORMAL, "resetFinish").send(player);
+                    @Override
+                    public void run() {
+                        OfflinePlayer target = YDDailyQuestMain.getInstance().getServer().getOfflinePlayer(args[1]);
+                        if (!(target.hasPlayedBefore() || target.isOnline())) {
+                            messageContext.get(MessageType.ERROR, "playerNotFound").send(player);
+                            return;
+                        }
+
+                        DeliverAssignManager assignManager = DeliverAssignManager.getInstance();
+                        assignManager.getData(target.getUniqueId()).keySet().forEach(destination -> assignManager.setFinished(player.getUniqueId(), destination, false));
+                        messageContext.get(MessageType.NORMAL, "resetFinish").send(player);
+                    }
+                }.runTaskAsynchronously(YDDailyQuestMain.getInstance());
                 return true;
             }
 
             case "생성" -> {
+                // argument pre-check
                 if (args.length == 1) {
                     messageContext.get(MessageType.ERROR, "noDestinationName").send(player);
                     return false;
@@ -69,7 +80,6 @@ public class DeliverCmd implements CommandExecutor {
                     return false;
                 }
 
-                String destinationName = args[1];
 
                 NPC selectedNPC = CitizensAPI.getDefaultNPCSelector().getSelected(player);
                 if (selectedNPC == null) {
@@ -77,20 +87,21 @@ public class DeliverCmd implements CommandExecutor {
                     return false;
                 }
                 String traderName = selectedNPC.getName();
-
+                String destinationName = args[1];
 
                 DestinationRepository destinationRepository = DestinationRepository.getInstance();
                 if (destinationRepository.getDestination(destinationName) != null) {
                     messageContext.get(MessageType.ERROR, "nameAlreadyTaken").send(player);
                     return false;
                 }
-                destinationRepository.putDestination(new Destination(destinationName, "해당 값을 변경해주세요.", new Trader(new ArrayList<>(), new ArrayList<>(), traderName)));
 
+                destinationRepository.putDestination(new Destination(destinationName, "해당 값을 변경해주세요.", new Trader(new ArrayList<>(), new ArrayList<>(), traderName)));
                 messageContext.get(MessageType.NORMAL, "destinationCreated").send(player);
                 return true;
             }
 
             case "설정" -> {
+                // argument pre-check
                 if (args.length == 1) {
                     messageContext.get(MessageType.ERROR, "noDestinationName").send(player);
                     return false;
@@ -115,5 +126,40 @@ public class DeliverCmd implements CommandExecutor {
                 return true;
             }
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+        List<String> completions = new ArrayList<>();
+
+        if (args.length == 1) {
+            if (sender.isOp()) completions.addAll(List.of("초기화", "생성", "설정"));
+        } else if (args.length == 2) {
+            switch (args[0]) {
+                case "초기화" -> {
+                    completions.add("<플레이어>");
+                    List<Player> onlinePlayers = new ArrayList<>(YDDailyQuestMain.getInstance().getServer().getOnlinePlayers());
+                    completions.addAll(onlinePlayers
+                            .stream()
+                            .map(Player::getDisplayName)
+                            .toList());
+                }
+
+                case "생성" -> {
+                    completions.add("<이름>");
+                }
+
+                case "설정" -> {
+                    completions.add("<이름>");
+                    List<Destination> destinations = DestinationRepository.getInstance().getAllDestination();
+                    completions.addAll(destinations
+                            .stream()
+                            .map(Destination::getName)
+                            .toList());
+                }
+            }
+        }
+
+        return StringUtil.copyPartialMatches(args[args.length - 1], completions, new ArrayList<>());
     }
 }

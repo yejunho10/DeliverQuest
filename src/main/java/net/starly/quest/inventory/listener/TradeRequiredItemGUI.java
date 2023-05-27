@@ -36,6 +36,8 @@ public class TradeRequiredItemGUI extends InventoryListenerBase {
 
     @Override
     protected void onClose(InventoryCloseEvent event) {
+        if (!event.getPlayer().isOp()) return;
+
         Destination destination = ((DeliverySettingsGUI) event.getInventory().getHolder()).destination();
         List<ItemStack> requiredItems = Arrays.stream(event.getInventory().getContents()).filter(Objects::nonNull).toList();
         destination.getTrader().setRequirements(requiredItems);

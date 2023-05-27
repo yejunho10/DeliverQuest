@@ -1,18 +1,18 @@
 package net.starly.quest;
 
 import net.starly.quest.command.DeliverCmd;
-import net.starly.quest.command.tabcomplete.DeliverTab;
 import net.starly.quest.destination.repo.DestinationRepository;
 import net.starly.quest.dispatcher.ChatInputDispatcher;
+import net.starly.quest.message.MessageLoader;
 import net.starly.quest.npc.listener.TraderNPC;
 import net.starly.quest.scheduler.DeliverQuestInitializeScheduler;
 import net.starly.quest.trade.strategy.service.SimpleTradeService;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public class YDDailyQuestMain extends JavaPlugin {
 
@@ -49,20 +49,21 @@ public class YDDailyQuestMain extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
 
-        File message = new File(getDataFolder(), "message.yml");
-        if (!message.exists()) saveResource("message.yml", false);
+        File messageFile = new File(getDataFolder(), "message.yml");
+        if (!messageFile.exists()) saveResource("message.yml", false);
 
-        File destinations = new File(getDataFolder(), "data.yml");
-        if (!destinations.exists()) saveResource("data.yml", false);
+        File dataFile = new File(getDataFolder(), "data.yml");
+        if (!dataFile.exists()) saveResource("data.yml", false);
 
         DestinationRepository.getInstance().$initialize();
+        MessageLoader.load(YamlConfiguration.loadConfiguration(messageFile));
 
         /* COMMAND
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         PluginCommand deliverCmd = getServer().getPluginCommand("배달");
         if (deliverCmd != null) {
             deliverCmd.setExecutor(new DeliverCmd());
-            deliverCmd.setTabCompleter(new DeliverTab());
+            deliverCmd.setTabCompleter(new DeliverCmd());
         }
 
         /* LISTENER
