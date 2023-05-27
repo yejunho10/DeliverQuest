@@ -48,7 +48,13 @@ public class TradeRewardItemGUI extends InventoryListenerBase {
                 }
             }.runTaskLater(YDDailyQuestMain.getInstance(), 1L);
         } else {
-            DeliverStatusGUI.getInstance().openInventory((Player) event.getPlayer(), null);
+            new BukkitRunnable() {
+
+                @Override
+                public void run() {
+                    DeliverStatusGUI.getInstance().openInventory((Player) event.getPlayer(), null);
+                }
+            }.runTaskLater(YDDailyQuestMain.getInstance(), 1L);
         }
     }
 
