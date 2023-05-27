@@ -2,7 +2,6 @@
 # │         MESSAGE SETTINGS         │ #
 # +──────────────────────────────────+ #
 messages:
-
   # 접두사
   prefix: " &eYD-DailyQuest &6| &r"
 
@@ -28,7 +27,6 @@ messages:
 # │      ERROR MESSAGE SETTINGS      │ #
 # +──────────────────────────────────+ #
 errorMessages:
-
   # 플랫폼이 잘못된 경우
   wrongPlatform: "&c콘솔에서는 해당 명령어를 사용할 수 없습니다."
 
