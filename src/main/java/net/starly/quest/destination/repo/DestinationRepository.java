@@ -77,7 +77,7 @@ public class DestinationRepository {
     public void saveAll() {
         try {
             YamlConfiguration config = YamlConfiguration.loadConfiguration(DATA_CONFIG);
-            ConfigurationSection section = config.createSection("destination");
+            ConfigurationSection section = config.getConfigurationSection("destination");
             getAllDestination().forEach(destination -> section.set(destination.getName(), EncodeUtil.encode(destination)));
 
             config.save(DATA_CONFIG);

@@ -9,15 +9,18 @@ import net.starly.quest.destination.repo.DestinationRepository;
 import net.starly.quest.inventory.listener.DeliverStatusGUI;
 import net.starly.quest.inventory.listener.DestinationSettingsGUI;
 import net.starly.quest.message.MessageContext;
+import net.starly.quest.message.MessageLoader;
 import net.starly.quest.message.enums.MessageType;
 import net.starly.quest.trade.Trader;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.*;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +43,22 @@ public class DeliverExecutor implements TabExecutor {
         }
 
         switch (args[0]) {
+            case "리로드" -> {
+                // argument pre-check
+                if (args.length != 1) {
+                    messageContext.get(MessageType.ERROR, "wrongCommand").send(player);
+                    return false;
+                }
+
+                DestinationRepository.getInstance().saveAll();
+                DestinationRepository.getInstance().loadAll();
+
+                MessageLoader.load(YamlConfiguration.loadConfiguration(new File(YDDailyQuestMain.getInstance().getDataFolder(), "message.yml")));
+
+                messageContext.get(MessageType.NORMAL, "reloadComplete").send(player);
+                return true;
+            }
+
             case "초기화" -> {
                 // argument pre-check
                 if (args.length == 1) {
@@ -47,7 +66,6 @@ public class DeliverExecutor implements TabExecutor {
                     return false;
                 } else if (args.length > 2) {
                     messageContext.get(MessageType.ERROR, "wrongCommand").send(player);
-
                     return false;
                 }
 
@@ -133,7 +151,7 @@ public class DeliverExecutor implements TabExecutor {
         List<String> completions = new ArrayList<>();
 
         if (args.length == 1) {
-            if (sender.isOp()) completions.addAll(List.of("초기화", "생성", "설정"));
+            if (sender.isOp()) completions.addAll(List.of("리로드", "초기화", "생성", "설정"));
         } else if (args.length == 2) {
             switch (args[0]) {
                 case "초기화" -> {
