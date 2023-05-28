@@ -1,4 +1,4 @@
-package net.starly.quest.trade.strategy.service;
+package net.starly.quest.trade.executor.impl;
 
 import net.citizensnpcs.api.npc.NPC;
 import net.starly.core.util.InventoryUtil;
@@ -7,16 +7,14 @@ import net.starly.quest.destination.Destination;
 import net.starly.quest.message.MessageContext;
 import net.starly.quest.message.enums.MessageType;
 import net.starly.quest.trade.Trader;
-import net.starly.quest.trade.strategy.TradeServiceBase;
+import net.starly.quest.trade.executor.TradeExecutor;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-
-public class SimpleTradeService implements TradeServiceBase {
+public class SimpleTradeService implements TradeExecutor {
 
     @Override
     public void execute(Player player, NPC npc, Destination destination) {

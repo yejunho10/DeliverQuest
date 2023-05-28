@@ -21,10 +21,12 @@ import java.util.Map;
 public class DeliverStatusGUI extends InventoryListenerBase {
 
     private static DeliverStatusGUI instance;
+
     public static DeliverStatusGUI getInstance() {
         if (instance == null) instance = new DeliverStatusGUI();
         return instance;
     }
+
     private DeliverStatusGUI() {}
 
 

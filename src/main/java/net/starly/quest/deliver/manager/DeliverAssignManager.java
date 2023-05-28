@@ -10,10 +10,12 @@ import java.util.*;
 public class DeliverAssignManager {
 
     private static DeliverAssignManager instance;
+
     public static DeliverAssignManager getInstance() {
         if (instance == null) instance = new DeliverAssignManager();
         return instance;
     }
+
     private DeliverAssignManager() {}
 
 
@@ -26,21 +28,7 @@ public class DeliverAssignManager {
     @NotNull
     public Map<Destination, Boolean> getData(UUID uniqueId) {
         if (!data.containsKey(uniqueId)) {
-            DestinationRepository destinationRepository = DestinationRepository.getInstance();
-            List<Destination> destinations = destinationRepository.getAllDestination();
-
-            Map<Destination, Boolean> data = new HashMap<>();
-            for (int i = 0; i < 3; i++) {
-                Destination picked = pickOne(destinations);
-                if (data.containsKey(picked)) {
-                    i--;
-                    continue;
-                }
-
-                data.put(picked, false);
-            }
-
-            putData(uniqueId, data);
+            assignToPlayer(uniqueId);
         }
 
         return data.get(uniqueId);
@@ -64,5 +52,23 @@ public class DeliverAssignManager {
 
     private <T> T pickOne(List<T> list) {
         return list.get(new Random().nextInt(list.size() - 1));
+    }
+
+    private void assignToPlayer(UUID uniqueId) {
+        DestinationRepository destinationRepository = DestinationRepository.getInstance();
+        List<Destination> destinations = destinationRepository.getAllDestination();
+
+        Map<Destination, Boolean> data = new HashMap<>();
+        for (int i = 0; i < 3; i++) {
+            Destination picked = pickOne(destinations);
+            if (data.containsKey(picked)) {
+                i--;
+                continue;
+            }
+
+            data.put(picked, false);
+        }
+
+        putData(uniqueId, data);
     }
 }

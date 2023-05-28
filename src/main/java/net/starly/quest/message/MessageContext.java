@@ -33,7 +33,7 @@ public class MessageContext {
     }
 
     public STMessage get(MessageType type, String key, String def, Function<String, String> replacer) {
-        return new STMessage(getPrefix(), replacer.apply(get(type, key, def).getMessage()).replace("{prefix}", getPrefix()));
+        return new STMessage(getPrefix(), replacer.apply(get(type, key, def).message()).replace("{prefix}", getPrefix()));
     }
 
     public STMessage get(MessageType type, String key, Function<String, String> replacer) {

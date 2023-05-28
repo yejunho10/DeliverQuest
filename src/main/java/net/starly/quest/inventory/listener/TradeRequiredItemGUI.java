@@ -20,10 +20,12 @@ import java.util.Objects;
 public class TradeRequiredItemGUI extends InventoryListenerBase {
 
     private static TradeRequiredItemGUI instance;
+
     public static TradeRequiredItemGUI getInstance() {
         if (instance == null) instance = new TradeRequiredItemGUI();
         return instance;
     }
+
     private TradeRequiredItemGUI() {}
 
 

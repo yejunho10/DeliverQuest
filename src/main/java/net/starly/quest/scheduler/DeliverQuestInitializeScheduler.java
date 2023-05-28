@@ -12,11 +12,11 @@ public class DeliverQuestInitializeScheduler extends BukkitRunnable {
 
     public static void start() {
         final LocalDateTime now = LocalDateTime.now();
-        final int TICK_PER_DAY = 24 * 60 * 60 * 20;
         final int TICK_PER_SECOND = 20;
         final int TICK_PER_MINUTE = 60 * TICK_PER_SECOND;
         final int TICK_PER_HOUR = 60 * TICK_PER_MINUTE;
-        final int DELAY = ((24 - now.getHour()) * TICK_PER_HOUR) + ((60 - now.getMinute()) * TICK_PER_MINUTE) + ((60 - now.getSecond()) * TICK_PER_SECOND);
+        final int TICK_PER_DAY = 24 * TICK_PER_HOUR;
+        final int DELAY = ((9 - now.getHour()) * TICK_PER_HOUR) + ((2 - now.getMinute()) * TICK_PER_MINUTE) + ((60 - now.getSecond()) * TICK_PER_SECOND);
 
         // ※ 24시 0분 0초에 실행할 시, 그 즉시는 실행안됨 ※
         instance = new DeliverQuestInitializeScheduler();

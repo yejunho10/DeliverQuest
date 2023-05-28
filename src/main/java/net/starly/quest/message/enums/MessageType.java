@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum MessageType {
+
     NORMAL("messages"),
     ERROR("errorMessages");
 
-    @Getter
-    private final String path;
+    @Getter private final String path;
 }

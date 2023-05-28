@@ -6,7 +6,7 @@ import net.starly.quest.dispatcher.ChatInputDispatcher;
 import net.starly.quest.message.MessageLoader;
 import net.starly.quest.npc.listener.TraderNPC;
 import net.starly.quest.scheduler.DeliverQuestInitializeScheduler;
-import net.starly.quest.trade.strategy.service.SimpleTradeService;
+import net.starly.quest.trade.executor.impl.SimpleTradeService;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -17,6 +17,7 @@ import java.io.File;
 public class YDDailyQuestMain extends JavaPlugin {
 
     private static YDDailyQuestMain instance;
+
     public static YDDailyQuestMain getInstance() {
         return instance;
     }
@@ -42,8 +43,6 @@ public class YDDailyQuestMain extends JavaPlugin {
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         instance = this;
 
-        TraderNPC.getInstance().setTradeServiceProvider(new SimpleTradeService());
-
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         saveDefaultConfig();
@@ -54,7 +53,7 @@ public class YDDailyQuestMain extends JavaPlugin {
         File dataFile = new File(getDataFolder(), "data.yml");
         if (!dataFile.exists()) saveResource("data.yml", false);
 
-        DestinationRepository.getInstance().$initialize();
+        DestinationRepository.getInstance().loadAll();
         MessageLoader.load(YamlConfiguration.loadConfiguration(messageFile));
 
         /* COMMAND

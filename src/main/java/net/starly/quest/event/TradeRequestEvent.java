@@ -1,26 +1,33 @@
 package net.starly.quest.event;
 
 import lombok.Getter;
+import lombok.Setter;
+import net.citizensnpcs.api.npc.NPC;
 import net.starly.quest.destination.Destination;
+import net.starly.quest.trade.executor.TradeExecutor;
+import net.starly.quest.trade.executor.impl.SimpleTradeService;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class DeliverFinishEvent extends Event implements Cancellable {
+public class TradeRequestEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
-
-    @Getter private final Destination destination;
     @Getter private final Player player;
+    @Getter private final NPC npc;
+    @Getter private final Destination destination;
+    @Getter @Setter private TradeExecutor executor;
     private boolean cancel;
 
 
-    public DeliverFinishEvent(Player player, Destination destination) {
+    public TradeRequestEvent(Player player, NPC npc, Destination destination) {
         this.player = player;
+        this.npc = npc;
         this.destination = destination;
         this.cancel = false;
+        this.executor = new SimpleTradeService();
     }
 
 

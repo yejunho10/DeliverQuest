@@ -19,15 +19,16 @@ import java.util.Map;
 public class DestinationRepository {
 
     private static DestinationRepository instance;
+
     public static DestinationRepository getInstance() {
         if (instance == null) instance = new DestinationRepository();
         return instance;
     }
+
     private DestinationRepository() {}
 
 
     private static final File DATA_CONFIG = new File(YDDailyQuestMain.getInstance().getDataFolder(), "data.yml");
-
     private final Map<String, Destination> data = new HashMap<>();
 
     public void putDestination(Destination destination) {
@@ -50,7 +51,9 @@ public class DestinationRepository {
 
 
     @Deprecated
-    public void $initialize() {
+    public void loadAll() {
+        clear();
+
         TraderNPC traderNPC = TraderNPC.getInstance();
         FileConfiguration config = YamlConfiguration.loadConfiguration(DATA_CONFIG);
         ConfigurationSection section = config.getConfigurationSection("destination");
@@ -72,12 +75,10 @@ public class DestinationRepository {
     }
 
     public void saveAll() {
-        DestinationRepository manager = DestinationRepository.getInstance();
-
         try {
             YamlConfiguration config = YamlConfiguration.loadConfiguration(DATA_CONFIG);
             ConfigurationSection section = config.createSection("destination");
-            manager.getAllDestination().forEach(destination -> section.set(destination.getName(), EncodeUtil.encode(destination)));
+            getAllDestination().forEach(destination -> section.set(destination.getName(), EncodeUtil.encode(destination)));
 
             config.save(DATA_CONFIG);
         } catch (IOException ex) {

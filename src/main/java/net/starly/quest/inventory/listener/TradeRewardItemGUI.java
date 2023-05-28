@@ -19,10 +19,12 @@ import java.util.Objects;
 public class TradeRewardItemGUI extends InventoryListenerBase {
 
     private static TradeRewardItemGUI instance;
+
     public static TradeRewardItemGUI getInstance() {
         if (instance == null) instance = new TradeRewardItemGUI();
         return instance;
     }
+
     private TradeRewardItemGUI() {}
 
 

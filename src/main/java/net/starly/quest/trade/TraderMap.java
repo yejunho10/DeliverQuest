@@ -10,10 +10,12 @@ import java.util.Map;
 public class TraderMap {
 
     private static TraderMap instance;
+
     public static TraderMap getInstance() {
         if (instance == null) instance = new TraderMap();
         return instance;
     }
+
     private TraderMap() {}
 
 
