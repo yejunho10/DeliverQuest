@@ -1,12 +1,11 @@
 package net.starly.quest;
 
+import lombok.Getter;
 import net.starly.quest.command.DeliverExecutor;
 import net.starly.quest.destination.repo.DestinationRepository;
 import net.starly.quest.dispatcher.ChatInputDispatcher;
 import net.starly.quest.message.MessageLoader;
-import net.starly.quest.npc.listener.TraderNPC;
 import net.starly.quest.scheduler.DeliverQuestInitializeScheduler;
-import net.starly.quest.trade.executor.impl.SimpleTradeService;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -16,11 +15,7 @@ import java.io.File;
 
 public class YDDailyQuestMain extends JavaPlugin {
 
-    private static YDDailyQuestMain instance;
-
-    public static YDDailyQuestMain getInstance() {
-        return instance;
-    }
+    @Getter private static YDDailyQuestMain instance;
 
 
     @Override
