@@ -1,6 +1,6 @@
 package net.starly.quest.destination.repo;
 
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.npc.listener.TraderNPC;
 import net.starly.quest.util.EncodeUtil;
@@ -28,7 +28,7 @@ public class DestinationRepository {
     private DestinationRepository() {}
 
 
-    private static final File DATA_CONFIG = new File(YDDailyQuestMain.getInstance().getDataFolder(), "data.yml");
+    private static final File DATA_CONFIG = new File(YDDailyQuest.getInstance().getDataFolder(), "data.yml");
     private final Map<String, Destination> data = new HashMap<>();
 
     public void putDestination(Destination destination) {

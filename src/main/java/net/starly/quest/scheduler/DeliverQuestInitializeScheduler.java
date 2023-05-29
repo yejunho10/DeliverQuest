@@ -1,6 +1,6 @@
 package net.starly.quest.scheduler;
 
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.deliver.manager.DeliverAssignManager;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -19,7 +19,7 @@ public class DeliverQuestInitializeScheduler extends BukkitRunnable {
 
         // ※ 24시 0분 0초에 실행할 시, 그 즉시는 실행안됨 ※
         instance = new DeliverQuestInitializeScheduler();
-        instance.runTaskTimerAsynchronously(YDDailyQuestMain.getInstance(), DELAY, TICK_PER_DAY);
+        instance.runTaskTimerAsynchronously(YDDailyQuest.getInstance(), DELAY, TICK_PER_DAY);
     }
 
     public static void stop() {

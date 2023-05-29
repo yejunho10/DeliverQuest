@@ -13,9 +13,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
-public class YDDailyQuestMain extends JavaPlugin {
+public class YDDailyQuest extends JavaPlugin {
 
-    @Getter private static YDDailyQuestMain instance;
+    @Getter private static YDDailyQuest instance;
 
 
     @Override

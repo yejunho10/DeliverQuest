@@ -1,7 +1,7 @@
 package net.starly.quest.inventory.listener;
 
 import net.starly.core.builder.ItemBuilder;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.destination.repo.DestinationRepository;
 import net.starly.quest.dispatcher.ChatInputDispatcher;
@@ -56,7 +56,7 @@ public class DestinationSettingsGUI extends InventoryListenerBase {
                         public void run() {
                             DestinationSettingsGUI.getInstance().openInventory(chatEvent.getPlayer(), destination);
                         }
-                    }.runTask(YDDailyQuestMain.getInstance());
+                    }.runTask(YDDailyQuest.getInstance());
                 });
             }
 
@@ -72,7 +72,7 @@ public class DestinationSettingsGUI extends InventoryListenerBase {
 
     @Override
     public void openInventory(Player player, Destination destination) {
-        Inventory inventory = YDDailyQuestMain.getInstance().getServer().createInventory(new DeliverySettingsGUI(destination), 27, "배달 설정 [" + destination.getName() + "]");
+        Inventory inventory = YDDailyQuest.getInstance().getServer().createInventory(new DeliverySettingsGUI(destination), 27, "배달 설정 [" + destination.getName() + "]");
 
         ItemStack emptySlot = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("&r").build();
         fillItem(inventory, emptySlot, 0, 9);

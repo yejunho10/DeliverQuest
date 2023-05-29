@@ -2,7 +2,7 @@ package net.starly.quest.npc.listener;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.event.TradeRequestEvent;
 import net.starly.quest.trade.TraderMap;
 import net.starly.quest.destination.Destination;
@@ -30,7 +30,7 @@ public class TraderNPC extends NPCListenerBase {
         Destination destination = TraderMap.getInstance().getDestination(npc.getName());
         TradeRequestEvent tradeRequestEvent = new TradeRequestEvent(player, npc, destination);
 
-        PluginManager pluginManager = YDDailyQuestMain.getInstance().getServer().getPluginManager();
+        PluginManager pluginManager = YDDailyQuest.getInstance().getServer().getPluginManager();
         pluginManager.callEvent(tradeRequestEvent);
         if (tradeRequestEvent.isCancelled()) return;
 

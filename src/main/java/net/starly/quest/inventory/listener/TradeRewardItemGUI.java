@@ -1,7 +1,6 @@
 package net.starly.quest.inventory.listener;
 
-import net.starly.core.util.collection.STList;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.inventory.holder.DeliverySettingsGUI;
 import net.starly.quest.inventory.listener.base.InventoryListenerBase;
@@ -48,7 +47,7 @@ public class TradeRewardItemGUI extends InventoryListenerBase {
                 public void run() {
                     DestinationSettingsGUI.getInstance().openInventory((Player) event.getPlayer(), destination);
                 }
-            }.runTaskLater(YDDailyQuestMain.getInstance(), 1L);
+            }.runTaskLater(YDDailyQuest.getInstance(), 1L);
         } else {
             new BukkitRunnable() {
 
@@ -56,13 +55,13 @@ public class TradeRewardItemGUI extends InventoryListenerBase {
                 public void run() {
                     DeliverStatusGUI.getInstance().openInventory((Player) event.getPlayer(), null);
                 }
-            }.runTaskLater(YDDailyQuestMain.getInstance(), 1L);
+            }.runTaskLater(YDDailyQuest.getInstance(), 1L);
         }
     }
 
     @Override
     public void openInventory(Player player, Destination destination) {
-        Inventory inventory = YDDailyQuestMain.getInstance().getServer().createInventory(new DeliverySettingsGUI(destination), 36, "보상 [" + destination.getName() + "]");
+        Inventory inventory = YDDailyQuest.getInstance().getServer().createInventory(new DeliverySettingsGUI(destination), 36, "보상 [" + destination.getName() + "]");
 
         List<ItemStack> rewards = destination.getTrader().getRewards();
         for (int i = 0; i < rewards.size(); i++) {

@@ -1,7 +1,7 @@
 package net.starly.quest.message;
 
 import lombok.Getter;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import org.bukkit.command.CommandSender;
 
 public record STMessage(@Getter String prefix, @Getter String message) {
@@ -13,6 +13,6 @@ public record STMessage(@Getter String prefix, @Getter String message) {
 
     public void broadcast() {
         if (message.isEmpty()) return;
-        YDDailyQuestMain.getInstance().getServer().broadcastMessage(message);
+        YDDailyQuest.getInstance().getServer().broadcastMessage(message);
     }
 }

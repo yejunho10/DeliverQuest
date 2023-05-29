@@ -2,7 +2,7 @@ package net.starly.quest.inventory.listener;
 
 import net.starly.core.builder.ItemBuilder;
 import net.starly.core.data.Config;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.deliver.manager.DeliverAssignManager;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.inventory.listener.base.InventoryListenerBase;
@@ -35,7 +35,7 @@ public class DeliverStatusGUI extends InventoryListenerBase {
         event.setCancelled(true);
 
 
-        FileConfiguration config = YDDailyQuestMain.getInstance().getConfig();
+        FileConfiguration config = YDDailyQuest.getInstance().getConfig();
 
         DeliverAssignManager assignManager = DeliverAssignManager.getInstance();
         Map<Destination, Boolean> data = assignManager.getData(event.getWhoClicked().getUniqueId());
@@ -57,14 +57,14 @@ public class DeliverStatusGUI extends InventoryListenerBase {
 
     @Override
     public void openInventory(Player player, @Nullable Destination destination) {
-        FileConfiguration config = YDDailyQuestMain.getInstance().getConfig();
+        FileConfiguration config = YDDailyQuest.getInstance().getConfig();
 
         DeliverAssignManager assignManager = DeliverAssignManager.getInstance();
         Map<Destination, Boolean> data = assignManager.getData(player.getUniqueId());
         List<Destination> deliverQuests = new ArrayList<>(data.keySet());
 
 
-        Inventory inventory = new Config("config", YDDailyQuestMain.getInstance()).getInventory("gui.status.inventory");
+        Inventory inventory = new Config("config", YDDailyQuest.getInstance()).getInventory("gui.status.inventory");
         inventory.setItem(
                 config.getInt("gui.status.slots.first"),
                 new ItemBuilder(Material.END_CRYSTAL)

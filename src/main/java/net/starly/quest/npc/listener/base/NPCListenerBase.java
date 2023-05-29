@@ -2,7 +2,7 @@ package net.starly.quest.npc.listener.base;
 
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.destination.Destination;
 import org.bukkit.Server;
 import org.bukkit.event.EventPriority;
@@ -22,7 +22,7 @@ public abstract class NPCListenerBase {
 
 
     public void registerNPCRightClickEvent(Destination destination) {
-        Server server = YDDailyQuestMain.getInstance().getServer();
+        Server server = YDDailyQuest.getInstance().getServer();
 
         Listener closeEventListener = new Listener() {};
         server.getPluginManager().registerEvent(NPCRightClickEvent.class, closeEventListener, EventPriority.LOWEST, (listeners, event) -> {
@@ -38,6 +38,6 @@ public abstract class NPCListenerBase {
 
                 onRightClick(rightClickEvent);
             }
-        }, YDDailyQuestMain.getInstance());
+        }, YDDailyQuest.getInstance());
     }
 }

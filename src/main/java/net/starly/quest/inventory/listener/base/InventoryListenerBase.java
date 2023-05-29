@@ -1,6 +1,6 @@
 package net.starly.quest.inventory.listener.base;
 
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.destination.Destination;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -32,7 +32,7 @@ public abstract class InventoryListenerBase {
     }
 
     private void registerInventoryCloseEvent(UUID uuid) {
-        Server server = YDDailyQuestMain.getInstance().getServer();
+        Server server = YDDailyQuest.getInstance().getServer();
 
         Listener closeEventListener = new Listener() {};
         server.getPluginManager().registerEvent(InventoryCloseEvent.class, closeEventListener, EventPriority.LOWEST, (listeners, event) -> {
@@ -48,11 +48,11 @@ public abstract class InventoryListenerBase {
 
                 onClose(closeEvent);
             }
-        }, YDDailyQuestMain.getInstance());
+        }, YDDailyQuest.getInstance());
     }
 
     private Listener registerInventoryClickEvent(UUID uuid) {
-        Server server = YDDailyQuestMain.getInstance().getServer();
+        Server server = YDDailyQuest.getInstance().getServer();
         Listener listener = new Listener() {};
         server.getPluginManager().registerEvent(InventoryClickEvent.class, listener, EventPriority.LOWEST, (listeners, event) -> {
             if (!(event instanceof InventoryClickEvent clickEvent)) return;
@@ -61,7 +61,7 @@ public abstract class InventoryListenerBase {
             if (uuid.equals(player.getUniqueId())) {
                 onClick(clickEvent);
             }
-        }, YDDailyQuestMain.getInstance());
+        }, YDDailyQuest.getInstance());
 
         return listener;
     }

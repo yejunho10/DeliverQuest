@@ -2,7 +2,7 @@ package net.starly.quest.command;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.starly.quest.YDDailyQuestMain;
+import net.starly.quest.YDDailyQuest;
 import net.starly.quest.deliver.manager.DeliverAssignManager;
 import net.starly.quest.destination.Destination;
 import net.starly.quest.destination.repo.DestinationRepository;
@@ -53,7 +53,7 @@ public class DeliverExecutor implements TabExecutor {
                 DestinationRepository.getInstance().saveAll();
                 DestinationRepository.getInstance().loadAll();
 
-                MessageLoader.load(YamlConfiguration.loadConfiguration(new File(YDDailyQuestMain.getInstance().getDataFolder(), "message.yml")));
+                MessageLoader.load(YamlConfiguration.loadConfiguration(new File(YDDailyQuest.getInstance().getDataFolder(), "message.yml")));
 
                 messageContext.get(MessageType.NORMAL, "reloadComplete").send(player);
                 return true;
@@ -74,7 +74,7 @@ public class DeliverExecutor implements TabExecutor {
 
                     @Override
                     public void run() {
-                        OfflinePlayer target = YDDailyQuestMain.getInstance().getServer().getOfflinePlayer(args[1]);
+                        OfflinePlayer target = YDDailyQuest.getInstance().getServer().getOfflinePlayer(args[1]);
                         if (!(target.hasPlayedBefore() || target.isOnline())) {
                             messageContext.get(MessageType.ERROR, "playerNotFound").send(player);
                             return;
@@ -84,7 +84,7 @@ public class DeliverExecutor implements TabExecutor {
                         assignManager.getData(target.getUniqueId()).keySet().forEach(destination -> assignManager.setFinished(player.getUniqueId(), destination, false));
                         messageContext.get(MessageType.NORMAL, "resetFinish").send(player);
                     }
-                }.runTaskAsynchronously(YDDailyQuestMain.getInstance());
+                }.runTaskAsynchronously(YDDailyQuest.getInstance());
                 return true;
             }
 
@@ -156,7 +156,7 @@ public class DeliverExecutor implements TabExecutor {
             switch (args[0]) {
                 case "초기화" -> {
                     completions.add("<플레이어>");
-                    List<Player> onlinePlayers = new ArrayList<>(YDDailyQuestMain.getInstance().getServer().getOnlinePlayers());
+                    List<Player> onlinePlayers = new ArrayList<>(YDDailyQuest.getInstance().getServer().getOnlinePlayers());
                     completions.addAll(onlinePlayers
                             .stream()
                             .map(Player::getDisplayName)
