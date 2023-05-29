@@ -19,9 +19,9 @@ public abstract class InventoryListenerBase {
     private static final Map<UUID, Listener> listeners = new HashMap<>();
 
 
-    protected void onClose(InventoryCloseEvent event) {}
-    protected void onClick(InventoryClickEvent event) {}
-    public void openInventory(Player player, Destination destination) {}
+    protected abstract void onClose(InventoryCloseEvent event);
+    protected abstract void onClick(InventoryClickEvent event);
+    public abstract void openInventory(Player player, Destination destination);
 
 
     protected void openInventoryAndRegisterListener(Player player, Inventory inventory) {
