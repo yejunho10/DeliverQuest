@@ -118,6 +118,28 @@ public class DeliverExecutor implements TabExecutor {
                 return true;
             }
 
+            case "삭제" -> {
+                // argument pre-check
+                if (args.length == 1) {
+                    messageContext.get(MessageType.ERROR, "noDestinationName").send(player);
+                    return false;
+                } else if (args.length > 2) {
+                    messageContext.get(MessageType.ERROR, "wrongCommand").send(player);
+                    return false;
+                }
+
+                String destinationName = args[1];
+                Destination destination = DestinationRepository.getInstance().getDestination(destinationName);
+                if (destination == null) {
+                    messageContext.get(MessageType.ERROR, "destinationNotExists").send(player);
+                    return false;
+                }
+
+                DestinationRepository.getInstance().removeDestination(destination.getName());
+                messageContext.get(MessageType.NORMAL, "destinationRemoved").send(player);
+                return true;
+            }
+
             case "설정" -> {
                 // argument pre-check
                 if (args.length == 1) {
@@ -151,7 +173,7 @@ public class DeliverExecutor implements TabExecutor {
         List<String> completions = new ArrayList<>();
 
         if (args.length == 1) {
-            if (sender.isOp()) completions.addAll(List.of("리로드", "초기화", "생성", "설정"));
+            if (sender.isOp()) completions.addAll(List.of("리로드", "초기화", "생성", "삭제", "설정"));
         } else if (args.length == 2) {
             switch (args[0]) {
                 case "초기화" -> {

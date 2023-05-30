@@ -45,6 +45,10 @@ public class DestinationRepository {
         return new ArrayList<>(data.values());
     }
 
+    public void removeDestination(String name) {
+        data.remove(name);
+    }
+
     public void clear() {
         data.clear();
     }
