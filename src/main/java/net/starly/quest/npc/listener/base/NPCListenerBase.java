@@ -24,8 +24,8 @@ public abstract class NPCListenerBase {
     public void registerNPCRightClickEvent(Destination destination) {
         Server server = YDDailyQuest.getInstance().getServer();
 
-        Listener closeEventListener = new Listener() {};
-        server.getPluginManager().registerEvent(NPCRightClickEvent.class, closeEventListener, EventPriority.LOWEST, (listeners, event) -> {
+        Listener listener_ = new Listener() {};
+        server.getPluginManager().registerEvent(NPCRightClickEvent.class, listener_, EventPriority.LOWEST, (listeners, event) -> {
             if (!(event instanceof NPCRightClickEvent rightClickEvent)) return;
 
             NPC clickedNPC = rightClickEvent.getNPC();
@@ -34,7 +34,7 @@ public abstract class NPCListenerBase {
                 if (listener != null) {
                     InventoryClickEvent.getHandlerList().unregister(listener);
                 }
-                InventoryCloseEvent.getHandlerList().unregister(closeEventListener);
+                InventoryCloseEvent.getHandlerList().unregister(listener);
 
                 onRightClick(rightClickEvent);
             }
